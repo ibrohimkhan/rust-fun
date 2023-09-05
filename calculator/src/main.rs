@@ -54,3 +54,26 @@ fn main() -> Result<(), String> {
 
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn calculate_works() {
+        let operation = Operation::Add(5., 5.);
+        let result = calculate(operation).unwrap();
+        assert_eq!(result, 10.);
+
+        let operation = Operation::Multiply(5., 5.);
+        let result = calculate(operation).unwrap();
+        assert_eq!(result, 25.);
+    }
+
+    #[test]
+    fn calculate_fails() {
+        let operation = Operation::Divide(5., 0.);
+        let result = calculate(operation);
+        assert!(result.is_err());
+    }
+}
