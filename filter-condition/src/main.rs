@@ -51,4 +51,16 @@ mod tests {
         let result = custom_filter::<i32>(items, &filter);
         assert_eq!(result, vec![0, 1, 2, 3, 4]);
     }
+
+    #[test]
+    fn matching_some_value_works() {
+        let items = vec![0, 1, 2, 3, 4, 3, 2, 7, 3, 9, 1];
+        let filter = FilterCondition::<i32> {
+            item: 3,
+            op: |a, b| a == b,
+        };
+
+        let result = custom_filter::<i32>(items, &filter);
+        assert_eq!(result, vec![3, 3, 3]);
+    }
 }
